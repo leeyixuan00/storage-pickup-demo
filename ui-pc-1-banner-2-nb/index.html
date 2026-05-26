@@ -1,0 +1,211 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>好奇抖音小店寄存提货系统</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <aside class="desktop-rail" aria-label="页面导航">
+        <div class="brand-mark">好奇</div>
+        <button class="rail-item active" data-nav="home" aria-label="我的寄存">
+          <span>寄存</span>
+        </button>
+        <button class="rail-item" data-nav="pickup" aria-label="提货选择">
+          <span>提货</span>
+        </button>
+        <button class="rail-item" data-nav="split" aria-label="系统分仓">
+          <span>分仓</span>
+        </button>
+        <button class="rail-item" data-nav="logistics" aria-label="物流进度">
+          <span>物流</span>
+        </button>
+        <button class="rail-item" data-nav="exception" aria-label="异常提醒">
+          <span>提醒</span>
+        </button>
+        <button class="rail-item" data-nav="service" aria-label="客服入口">
+          <span>客服</span>
+        </button>
+      </aside>
+
+      <main class="phone-frame" aria-live="polite">
+        <header class="topbar">
+          <button class="icon-btn ghost" id="backBtn" aria-label="返回">
+            <svg viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6" /></svg>
+          </button>
+          <div>
+            <p class="eyebrow">抖音小店寄存服务</p>
+            <h1 id="pageTitle">我的寄存商品</h1>
+          </div>
+          <button class="icon-btn ghost" data-open-detail="规则说明" aria-label="规则说明">
+            <svg viewBox="0 0 24 24"><path d="M12 17h.01M12 13a3 3 0 1 0-3-3M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18z" /></svg>
+          </button>
+        </header>
+
+        <section class="page active" id="homePage" data-title="我的寄存商品">
+          <div class="status-banner">
+            <div>
+              <p>当前寄存余额</p>
+              <strong>18 件</strong>
+              <span>其中 12 件可立即提货</span>
+            </div>
+            <button class="pill-btn" data-nav="pickup">去提货</button>
+          </div>
+
+          <div class="stat-grid">
+            <article><span>已寄存</span><strong>18</strong></article>
+            <article><span>可提货</span><strong>12</strong></article>
+            <article><span>已提货</span><strong>6</strong></article>
+          </div>
+
+          <div class="section-head">
+            <h2>寄存商品</h2>
+            <button class="text-link" data-open-detail="寄存明细">查看明细</button>
+          </div>
+
+          <div class="product-list" id="productList"></div>
+        </section>
+
+        <section class="page" id="pickupPage" data-title="选择提货商品">
+          <div class="pickup-card">
+            <label>提货品类</label>
+            <div class="segmented" data-group="category">
+              <button class="active" data-value="纸尿裤">纸尿裤</button>
+              <button data-value="拉拉裤">拉拉裤</button>
+              <button data-value="湿巾">湿巾</button>
+            </div>
+          </div>
+
+          <div class="pickup-card">
+            <label>提货码数/规格</label>
+            <div class="size-grid" data-group="size">
+              <button>NB</button><button>S</button><button class="active">M</button>
+              <button>L</button><button>XL</button><button>XXL</button>
+            </div>
+          </div>
+
+          <div class="pickup-card quantity-panel">
+            <div>
+              <label>提货数量</label>
+              <p>当前可提 <strong id="availableCount">8</strong> 件</p>
+            </div>
+            <div class="stepper" aria-label="调整提货数量">
+              <button id="minusBtn" aria-label="减少">-</button>
+              <strong id="pickupCount">3</strong>
+              <button id="plusBtn" aria-label="增加">+</button>
+            </div>
+          </div>
+
+          <div class="calc-card">
+            <div><span>本次提货</span><strong><b id="takeCount">3</b> 件</strong></div>
+            <div><span>提货后剩余</span><strong><b id="remainCount">5</b> 件</strong></div>
+          </div>
+
+          <div class="sticky-action">
+            <button class="primary-btn" data-nav="split">确认提货</button>
+          </div>
+        </section>
+
+        <section class="page" id="splitPage" data-title="系统自动分仓">
+          <div class="split-hero">
+            <span class="soft-tag">透明化履约</span>
+            <h2>本次提货将拆分为 <b>2</b> 个包裹发货</h2>
+            <p>由于库存分布不同，您的商品将由多个仓库分别发货，请耐心等待全部包裹送达。</p>
+          </div>
+
+          <div class="warehouse-list">
+            <article class="warehouse-card expanded">
+              <button class="collapse-head" aria-expanded="true">
+                <span>包裹 1 · 北京仓</span><i>已出库</i>
+              </button>
+              <div class="collapse-body">
+                <p>好奇皇家铂金纸尿裤 M 码 × 2</p>
+                <p>好奇湿巾 80 抽 × 1</p>
+              </div>
+            </article>
+            <article class="warehouse-card expanded">
+              <button class="collapse-head" aria-expanded="true">
+                <span>包裹 2 · 广州仓</span><i>待揽收</i>
+              </button>
+              <div class="collapse-body">
+                <p>好奇成长裤 L 码 × 3</p>
+              </div>
+            </article>
+          </div>
+
+          <div class="sticky-action">
+            <button class="primary-btn" data-nav="logistics">查看物流进度</button>
+          </div>
+        </section>
+
+        <section class="page" id="logisticsPage" data-title="物流状态">
+          <div class="delivery-summary">
+            <span>本次提货共 2 个包裹</span>
+            <strong>还有 1 个包裹未送达</strong>
+          </div>
+
+          <div class="package-list" id="packageList"></div>
+        </section>
+
+        <section class="page" id="exceptionPage" data-title="异常提醒">
+          <div class="comfort-card">
+            <span class="status-tag blue">运输中</span>
+            <h2>您的订单还有 1 个包裹正在运输中，请耐心等待。</h2>
+            <p>系统已为您持续跟踪分仓包裹，若出现延迟发货、库存不足或物流异常，会优先在这里提醒。</p>
+            <button class="secondary-btn" data-nav="logistics">查看未送达包裹</button>
+          </div>
+
+          <div class="faq-list">
+            <h2>常见问题</h2>
+            <button class="faq-item" data-open-detail="为什么会拆单？">为什么会拆单？</button>
+            <button class="faq-item" data-open-detail="为什么物流不同？">为什么物流不同？</button>
+            <button class="faq-item" data-open-detail="为什么只收到部分商品？">为什么只收到部分商品？</button>
+          </div>
+        </section>
+
+        <section class="page" id="servicePage" data-title="客服与反馈">
+          <div class="service-banner">
+            <h2>先自助排查，再联系人工</h2>
+            <p>多数少件、漏发疑问来自分仓包裹未全部送达，您可以先查看拆单和物流状态。</p>
+          </div>
+          <div class="service-grid">
+            <button data-nav="exception">
+              <strong>常见问题</strong>
+              <span>拆单、不同物流、部分送达</span>
+            </button>
+            <button data-nav="logistics">
+              <strong>物流进度</strong>
+              <span>查看每个包裹状态</span>
+            </button>
+            <button data-open-detail="订单问题反馈">
+              <strong>订单问题反馈</strong>
+              <span>少件、破损、地址修改</span>
+            </button>
+          </div>
+          <button class="primary-btn service-btn" data-open-detail="在线客服">在线客服</button>
+        </section>
+      </main>
+
+      <nav class="bottom-tabs" aria-label="底部导航">
+        <button class="active" data-nav="home"><span>首页</span></button>
+        <button data-nav="pickup"><span>提货</span></button>
+        <button data-nav="logistics"><span>物流</span></button>
+        <button data-nav="service"><span>客服</span></button>
+      </nav>
+    </div>
+
+    <div class="modal-backdrop" id="modalBackdrop" hidden>
+      <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+        <button class="icon-btn modal-close" id="modalClose" aria-label="关闭">
+          <svg viewBox="0 0 24 24"><path d="M18 6 6 18M6 6l12 12" /></svg>
+        </button>
+        <h2 id="modalTitle">查看详情</h2>
+        <p id="modalText"></p>
+      </div>
+    </div>
+
+    <script src="./app.js"></script>
+  </body>
+</html>
